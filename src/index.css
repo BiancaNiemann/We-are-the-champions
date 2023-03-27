@@ -1,0 +1,113 @@
+#root {
+  padding: 0;
+  width: 100%;
+  background-color: #111827;
+  box-sizing: border-box;
+}
+
+.container{
+  width: 380px;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img{
+  width: 90px
+}
+
+h1, 
+h2,
+button{
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, 
+button{
+  font-weight: 700;
+}
+
+h1{
+  font-size: 2rem;
+}
+
+h2{
+  font-weight: 400;
+  font-size: 1.75rem;
+}
+
+textarea,
+button,
+input{
+  border: none;
+  border-radius: 8px;
+}
+
+textarea{
+  width: 320px;
+  height: 120px;
+  padding: 20px;
+  margin: 10px 0 10px 0;
+}
+
+.input-boxes{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input{
+  width: 170px;
+  height: 40px;
+  text-align: center;
+}
+
+textarea,
+input{
+  background-color: #444059;
+  color: #8F8F8F; 
+}
+
+textarea,
+p,
+.endorsments-section,
+input{
+  font-family: 'Inter', sans-serif;
+}
+
+button{
+  color: black;
+  background-color: #28A9F1;
+  width: 360px;
+  height: 62px;
+  margin-bottom: 10px;
+  font-size: 1.55rem;
+  cursor: pointer;
+}
+
+div{
+  width: 340px;
+  height: auto;
+  padding: 1px 15px;
+  margin-bottom: 20px ;
+  background-color: white;
+  list-style: none;
+  word-wrap: break-word;
+  color: #1B1924;
+  cursor: pointer;
+}
+
+h4{
+  font-weight: bold;
+}
+
+.endorsments-section{
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
