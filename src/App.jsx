@@ -54,9 +54,9 @@ function App() {
   }
 
   function Endorsment(){
-    const [count, setCount] = useState(0)
+    
     const appendEndorstmentToList = endorsements.map(item => {
-      
+      const [count, setCount] = useState(0)
       return (
         <div 
           key={item[0]} 
