@@ -4,7 +4,7 @@ import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
   const [input, setInput] = useState('')
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
@@ -16,7 +16,6 @@ function App() {
   const app = initializeApp(appSettings)
   const database = getDatabase(app)
   const endorsmentsInDB = ref(database, "endorsments")
-  const likesInDB = ref(database, "likes")
 
   useEffect(() => {
     onValue(endorsmentsInDB, function (snapshot) {
@@ -54,35 +53,39 @@ function App() {
     setTo('')
   }
 
-  const appendEndorstmentToList = endorsements.map(item => {
-    return (
-      <div 
-        key={item[0]} 
-        
-        className="endorsment" 
-        >
-        <h4 id={item[0]}  onClick={(e) => removeEndorsment(e)}>To {item[1].to}</h4>
-        <p>{item[1].comment}</p>
-        <div className="last-line">
-          <h4>From {item[1].from}</h4>
-          <div className="likes">
-            <div 
-              className="heartLogo" 
-              onClick={() => setCount((count) => count + 1)}
-            > 
-             ❤
+  function Endorsment(){
+    const [count, setCount] = useState(0)
+    const appendEndorstmentToList = endorsements.map(item => {
+      
+      return (
+        <div 
+          key={item[0]} 
+          className="endorsment" 
+          >
+          <h4 id={item[0]}  onClick={(e) => removeEndorsment(e)}>To {item[1].to}</h4>
+          <p>{item[1].comment}</p>
+          <div className="last-line">
+            <h4>From {item[1].from}</h4>
+            <div className="likes">
+              <div 
+                className="heartLogo" 
+                id={`likes-${item[0]}`}
+                onClick={() => setCount((count) => count + 1)}
+              > 
+               ❤
+              </div>
+              <h4>{count}</h4>
             </div>
-            <h4>{count}</h4>
           </div>
         </div>
-      </div>
-    )
-  })
+      )
+    })
+    return appendEndorstmentToList
+  }
 
   function removeEndorsment(e){
     let exactLocationOfEndorsment = ref(database, `endorsments/${e.target.id}`)
     remove(exactLocationOfEndorsment)
-    console.log(e.target.id)
   }
 
   return (
@@ -118,7 +121,7 @@ function App() {
       <h2>- Endorsements -</h2>
       <div className="endorsments-section">
         <div>
-          {appendEndorstmentToList}
+          <Endorsment />
         </div>
       </div>
     </main>
