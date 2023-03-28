@@ -16,20 +16,15 @@ function App() {
   const app = initializeApp(appSettings)
   const database = getDatabase(app)
   const endorsmentsInDB = ref(database, "endorsments")
+  const likesInDB = ref(database, "likes")
 
   useEffect(() => {
     onValue(endorsmentsInDB, function (snapshot) {
       if (snapshot.exists()) {
         let endorsmentsArray = Object.entries(snapshot.val())
         setEndorsments(endorsmentsArray.reverse())
-        //clearInput()
-
-        /*for (let i = 0; i < endorsmentsArray.length; i++) {
-          let currentItem = endorsmentsArray[i]
-          appendEndorstmentToList(currentItem)  
-        }
-      } else {*/
-        //endorsmentsSection.innerHTML = "No endorsments added yet ... - be the first!!"
+      } else {
+        setEndorsments([])
       }
     })
   }, [input])
@@ -58,22 +53,43 @@ function App() {
     setFrom('')
     setTo('')
   }
-    
-  const appendEndorstmentToList = endorsements.forEach(item => {
-      return (
-        <div>
-          <h4>To ${item[1].from}</h4>
-          <h3>Test</h3>
+
+  const appendEndorstmentToList = endorsements.map(item => {
+    return (
+      <div 
+        key={item[0]} 
+        
+        className="endorsment" 
+        >
+        <h4 id={item[0]}  onClick={(e) => removeEndorsment(e)}>To {item[1].to}</h4>
+        <p>{item[1].comment}</p>
+        <div className="last-line">
+          <h4>From {item[1].from}</h4>
+          <div className="likes">
+            <div 
+              className="heartLogo" 
+              onClick={() => setCount((count) => count + 1)}
+            > 
+             ❤
+            </div>
+            <h4>{count}</h4>
+          </div>
         </div>
-      )
-    })
+      </div>
+    )
+  })
+
+  function removeEndorsment(e){
+    let exactLocationOfEndorsment = ref(database, `endorsments/${e.target.id}`)
+    remove(exactLocationOfEndorsment)
+    console.log(e.target.id)
+  }
 
   return (
     <main className="container">
       <img src="./assets/freddie.png" alt="img of freddie shadow" />
       <h1>We are the Champions</h1>
       <textarea
-        id="input-element"
         placeholder="Write your endorsment here"
         name="input-element"
         value={input}
@@ -82,7 +98,6 @@ function App() {
       <section className="input-boxes">
         <input
           type="text"
-          id="from-element"
           name="from-element"
           placeholder="From"
           value={from}
@@ -90,7 +105,6 @@ function App() {
         />
         <input
           type="text"
-          id="to-element"
           name="to-element"
           placeholder="To"
           value={to}
@@ -98,13 +112,14 @@ function App() {
         />
       </section>
       <button
-        id="publish-button"
         onClick={submitInputToFirebase}
       >Publish
       </button>
       <h2>- Endorsements -</h2>
-      <div id="endorsments-section" className="endorsments-section">
-        {appendEndorstmentToList}
+      <div className="endorsments-section">
+        <div>
+          {appendEndorstmentToList}
+        </div>
       </div>
     </main>
 
@@ -112,8 +127,3 @@ function App() {
 }
 
 export default App
-
-/*      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-      */

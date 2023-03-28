@@ -3,11 +3,11 @@
   width: 100%;
   background-color: #111827;
   box-sizing: border-box;
+  height: 1000px;
 }
 
 .container{
   width: 380px;
-  height: 100vh;
   margin: 0 auto;
   padding-top: 50px;
   display: flex;
@@ -49,7 +49,7 @@ input{
 
 textarea{
   width: 320px;
-  height: 120px;
+  min-height: 120px;
   padding: 20px;
   margin: 10px 0 10px 0;
 }
@@ -74,7 +74,7 @@ input{
 
 textarea,
 p,
-.endorsments-section,
+h4,
 input{
   font-family: 'Inter', sans-serif;
 }
@@ -89,10 +89,10 @@ button{
   cursor: pointer;
 }
 
-div{
+.endorsment{
   width: 340px;
   height: auto;
-  padding: 1px 15px;
+  padding: 1px 10px;
   margin-bottom: 20px ;
   background-color: white;
   list-style: none;
@@ -106,8 +106,26 @@ h4{
 }
 
 .endorsments-section{
-  color: white;
+  background-color: transparent;
   margin: 0;
-  padding: 0;
 }
 
+
+.last-line,
+.likes{
+  display: flex;
+}
+
+.last-line{
+  justify-content: space-between;
+}
+
+.likes{
+  padding-right: 10px;
+  align-items: center;
+}
+
+.heartLogo{
+  width: 30px;
+  font-size: 1.5rem;
+}
